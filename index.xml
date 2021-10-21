@@ -6,7 +6,19 @@
     <description>Recent content on 阿茂的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-Hans</language>
-    <lastBuildDate>Wed, 20 Oct 2021 18:38:17 +0800</lastBuildDate><atom:link href="http://example.org/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 21 Oct 2021 22:51:56 +0800</lastBuildDate><atom:link href="http://example.org/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>解决包冲突</title>
+      <link>http://example.org/posts/%E8%A7%A3%E5%86%B3%E5%8C%85%E5%86%B2%E7%AA%81/</link>
+      <pubDate>Thu, 21 Oct 2021 22:51:56 +0800</pubDate>
+      
+      <guid>http://example.org/posts/%E8%A7%A3%E5%86%B3%E5%8C%85%E5%86%B2%E7%AA%81/</guid>
+      <description>记录一下如何解决包冲突（小白视角大白话） 类路径（Claspath）  类的全限定类名（目录层级） 唯一确定了一个类 包就是把许多类放在⼀起的压缩包 在哪⾥可以找到类？-classpath/-cp 后面的包中！  我们在使用第三方类时，可能所使用的第三方类依赖了其他类，全限定类名是类的唯⼀标识！没有其他标识了！当多个同名类同时出现在Classpath中，麻烦就来了！
+Maven——划时代的包管理  Maven的中央仓库，按照⼀定的约定存储包，按照约定为所有的包编号，⽅便检索（groupId/artifactId/version） Maven的本地仓库，默认位于~/.m2（下载的第三⽅包放在这⾥进⾏缓存） 传递性依赖的⾃动管理，即绝对不允许最终的classpath出现同名不同版本的jar包 依赖冲突的解决：原则：最近的胜出  解决包冲突 当你看到如下的异常的时候，说明包冲突了！
+ AbstractMethodError NoClassDefFoundError ClassNotFoundException LinkageError  不要着急  看下后面异常的包名，idea右上角的Maven dependencies可以查看具体的依赖关系，也可以在终端中执行 mvn dependency:tree 查看Maven帮你解决冲突后的依赖关系（它把冲突解决后的那个依赖给咱们去掉了） 在mvn中央仓库中，通过包的编号（groupId/artifactId/version）通过源码查看不同版本的信息，选择需要的版本  方法一 既然谁离得近谁赢，那我们可以强行在 pom.xml 中直接引用正确的版本，如果 dependencies 中已经存在依赖的版本，将其删除或者改正为正确的版本
+方法二 将依赖错误版本的包排除，即在依赖 错误版本的包 的依赖中插入代码,如图 方法三 Maven helper 插件 </description>
+    </item>
+    
     <item>
       <title>使用hugo搭建个人博客</title>
       <link>http://example.org/posts/%E4%BD%BF%E7%94%A8hugo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</link>
