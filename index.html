@@ -128,6 +128,31 @@
       
       <div class="blah w-100">
         <h1 class="f3 fw1 athelas mt0 lh-title">
+          <a href="/posts/collection%E4%BD%93%E7%B3%BB%E7%9A%84%E5%B8%B8%E7%94%A8%E7%B1%BB%E5%8F%8A%E5%85%B6%E8%83%8C%E5%90%8E%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="color-inherit dim link">
+            Collection体系的常用类及其背后的数据结构
+            </a>
+        </h1>
+        <div class="f6 f5-l lh-copy nested-copy-line-height nested-links">
+          记录一下Collection体系的常用类及其背后的数据结构 Collection体系 概述 Collection是集合层次结构中的根接口。 一个集合代表一组对象，称为它的元素。 一些集合允许重复元素，而另一些则不允许。 有些是有序的，有些是无序的。 JDK 不提供此接口的任何直接实现：它提供了更具体的子接口（如 Set 和 List）的实现。
+Collection集合的通用方法  boolean add(E e)：把给定的对象添加到当前集合中 boolean addAll(E e)：把给定的集合添加到当前集合中 void clear()：清空集合中所有的元素 boolean remove(Object o)：把给定对象在当前集合中删除，删除成功返回true，失败返回false boolean contains(Object o)：判断当前集合中是否包含给定的对象，包含返回true，不包含返回false boolean isEmpty()：判断当前集合是否为空，为空返回true，不为空返回false int size()：返回集合中元素的个数 boolean rainAll(): 仅保留此集合中包含在指定集合中的元素,换句话说，从该集合中移除所有未包含在指定集合中的元素 Object[] toArray()：把集合中的元素存储到数组中 （调用此方法，将集合元素存入数组返回数组，再对数组进行遍历即可）  List接口 概述  List是Collection的子接口，本质是一个数组，但是可以动态扩容 有序：元素的存储顺序和获取顺序保持一致 可重复：允许存储重复元素 可重复的原因：有索引。因为对于重复的元素，具有不同的索引来区分  List 方法  add(int index, Object obj) ：将指定元素插入到集合的指定位置 remove(int index) 删除指定索引上的指定元素 set(int index, Object obj) 用指定元素替换指定索引上原有的元素 get(int index) 返回指定索引上的元素 （通过size方法获取到集合的长度，进而就能得到List集合的索引范围，再配合get方法，就能获取到每一个索引对应的每一个元素）  List 实现类  ArrayList：数组实现，顺序存储，增删慢，查询快 LinkedList：双向链表，节点存储，每个对象包含数据的同时还包含指向链表中前一个与后一个元素的引用，增和删比较快,查询和修改比较慢  Set接口 概述  Set 接口比 Collection 接口更加严格，不允许存储重复的元素 没有索引，即没有带索引的方法，所以不能使用传统for循环遍历  Set 方法 Set 实现类 Hashset   Hashset是Set接口的一个实现类，它所存储的元素是不可重复的，并且元素都是无序的（即存取顺序有可能不一致）
+        </div>
+          <a href="/posts/collection%E4%BD%93%E7%B3%BB%E7%9A%84%E5%B8%B8%E7%94%A8%E7%B1%BB%E5%8F%8A%E5%85%B6%E8%83%8C%E5%90%8E%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="ba b--moon-gray bg-light-gray br2 color-inherit dib f7 hover-bg-moon-gray link mt2 ph2 pv1">read more</a>
+        
+      </div>
+    </div>
+  </div>
+</article>
+
+          </div>
+        
+          <div class="relative w-100 mb4">
+            
+<article class="bb b--black-10">
+  <div class="db pv4 ph3 ph0-l no-underline dark-gray">
+    <div class="flex flex-column flex-row-ns">
+      
+      <div class="blah w-100">
+        <h1 class="f3 fw1 athelas mt0 lh-title">
           <a href="/posts/%E8%A7%A3%E5%86%B3%E5%8C%85%E5%86%B2%E7%AA%81/" class="color-inherit dim link">
             解决包冲突
             </a>
@@ -174,32 +199,25 @@ Maven——划时代的包管理  Maven的中央仓库，按照⼀定的约定�
 
           </div>
         
-          <div class="relative w-100 mb4">
-            
-<article class="bb b--black-10">
-  <div class="db pv4 ph3 ph0-l no-underline dark-gray">
-    <div class="flex flex-column flex-row-ns">
-      
-      <div class="blah w-100">
-        <h1 class="f3 fw1 athelas mt0 lh-title">
-          <a href="/posts/%E5%BC%80%E5%8D%9A%E5%A4%A7%E5%90%89/" class="color-inherit dim link">
-            开博大吉
-            </a>
-        </h1>
-        <div class="f6 f5-l lh-copy nested-copy-line-height nested-links">
-          大家好 我的博客开通了！大家一起加油！
-        </div>
-          <a href="/posts/%E5%BC%80%E5%8D%9A%E5%A4%A7%E5%90%89/" class="ba b--moon-gray bg-light-gray br2 color-inherit dib f7 hover-bg-moon-gray link mt2 ph2 pv1">read more</a>
-        
-      </div>
-    </div>
-  </div>
-</article>
-
-          </div>
-        
       </section>
 
+      
+      <section class="w-100">
+        <h1 class="f3">More</h1>
+        
+        
+          <h2 class="f5 fw4 mb4 dib mr3">
+            <a href="/posts/%E5%BC%80%E5%8D%9A%E5%A4%A7%E5%90%89/" class="link black dim">
+              开博大吉
+            </a>
+          </h2>
+        
+
+        
+        
+          <a href="/posts/" class="link db f6 pa2 br3 bg-mid-gray white dim w4 tc">All Posts</a>
+        
+        </section>
       
 
       </div>
