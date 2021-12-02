@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>多种方法实现生产者消费者模型 | 阿茂的博客</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="记录一下多种方法实现生产者消费者模型 要求：生产者生产10个随机的整数供消费者使用，消费者依次消费这10个随机的整数 标准输出应该得到这样的结果： Producing 42 Consuming 42 Producing -1 Consuming -1 ... Producing 10086 Consuming 10086 Producing -12345678 Consuming -12345678 分析要求 我们可以分别创建生产者线程和消费者线程，生产者每生产一个，消费者随即消费一个，所以两个线程需要协同工作，生产者只有在消费者消费之后才会继续生产，消费者只有在生产者生产之后才会消费
+多种方法实现   Object.wait/notify
+我们可以使用 Optional 作为存放随机数的容器，通过这个共有的容器去协同两个线程的工作，一定要注意的是：Optional是不可变的，两个线程如果有同一个Optional对象的引用，那么生产者线程每次都生产一个随机数，都会指向新的Optional对象，而消费者线程拿到的还是旧的对象，这样肯定得不到我们想要的结果。 所以我们应该在Optional外面包一层类，问题就迎刃而解了！
+package com.github.hcsp.multithread; import java.util.Optional; import java.util.Random; public class ProducerConsumer1 { public static void main(String[] args) throws InterruptedException { //同一把Object锁 Object lock = new Object(); Container container = new Container(); Producer producer = new Producer(lock, container); Consumer consumer = new Consumer(lock, container); producer.">
+    <meta name="generator" content="Hugo 0.88.1" />
+    
+    
+      <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+    
+
+    
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+
+    
+      
+
+    
+
+    
+    
+    <meta property="og:title" content="多种方法实现生产者消费者模型" />
+<meta property="og:description" content="记录一下多种方法实现生产者消费者模型 要求：生产者生产10个随机的整数供消费者使用，消费者依次消费这10个随机的整数 标准输出应该得到这样的结果： Producing 42 Consuming 42 Producing -1 Consuming -1 ... Producing 10086 Consuming 10086 Producing -12345678 Consuming -12345678 分析要求 我们可以分别创建生产者线程和消费者线程，生产者每生产一个，消费者随即消费一个，所以两个线程需要协同工作，生产者只有在消费者消费之后才会继续生产，消费者只有在生产者生产之后才会消费
+多种方法实现   Object.wait/notify
+我们可以使用 Optional 作为存放随机数的容器，通过这个共有的容器去协同两个线程的工作，一定要注意的是：Optional是不可变的，两个线程如果有同一个Optional对象的引用，那么生产者线程每次都生产一个随机数，都会指向新的Optional对象，而消费者线程拿到的还是旧的对象，这样肯定得不到我们想要的结果。 所以我们应该在Optional外面包一层类，问题就迎刃而解了！
+package com.github.hcsp.multithread; import java.util.Optional; import java.util.Random; public class ProducerConsumer1 { public static void main(String[] args) throws InterruptedException { //同一把Object锁 Object lock = new Object(); Container container = new Container(); Producer producer = new Producer(lock, container); Consumer consumer = new Consumer(lock, container); producer." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/posts/%E5%A4%9A%E7%A7%8D%E6%96%B9%E6%B3%95%E5%AE%9E%E7%8E%B0%E7%94%9F%E4%BA%A7%E8%80%85%E6%B6%88%E8%B4%B9%E8%80%85%E6%A8%A1%E5%9E%8B/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-12-01T12:11:09+08:00" />
+<meta property="article:modified_time" content="2021-12-01T12:11:09+08:00" />
+
+<meta itemprop="name" content="多种方法实现生产者消费者模型">
+<meta itemprop="description" content="记录一下多种方法实现生产者消费者模型 要求：生产者生产10个随机的整数供消费者使用，消费者依次消费这10个随机的整数 标准输出应该得到这样的结果： Producing 42 Consuming 42 Producing -1 Consuming -1 ... Producing 10086 Consuming 10086 Producing -12345678 Consuming -12345678 分析要求 我们可以分别创建生产者线程和消费者线程，生产者每生产一个，消费者随即消费一个，所以两个线程需要协同工作，生产者只有在消费者消费之后才会继续生产，消费者只有在生产者生产之后才会消费
+多种方法实现   Object.wait/notify
+我们可以使用 Optional 作为存放随机数的容器，通过这个共有的容器去协同两个线程的工作，一定要注意的是：Optional是不可变的，两个线程如果有同一个Optional对象的引用，那么生产者线程每次都生产一个随机数，都会指向新的Optional对象，而消费者线程拿到的还是旧的对象，这样肯定得不到我们想要的结果。 所以我们应该在Optional外面包一层类，问题就迎刃而解了！
+package com.github.hcsp.multithread; import java.util.Optional; import java.util.Random; public class ProducerConsumer1 { public static void main(String[] args) throws InterruptedException { //同一把Object锁 Object lock = new Object(); Container container = new Container(); Producer producer = new Producer(lock, container); Consumer consumer = new Consumer(lock, container); producer."><meta itemprop="datePublished" content="2021-12-01T12:11:09+08:00" />
+<meta itemprop="dateModified" content="2021-12-01T12:11:09+08:00" />
+<meta itemprop="wordCount" content="1119">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="多种方法实现生产者消费者模型"/>
+<meta name="twitter:description" content="记录一下多种方法实现生产者消费者模型 要求：生产者生产10个随机的整数供消费者使用，消费者依次消费这10个随机的整数 标准输出应该得到这样的结果： Producing 42 Consuming 42 Producing -1 Consuming -1 ... Producing 10086 Consuming 10086 Producing -12345678 Consuming -12345678 分析要求 我们可以分别创建生产者线程和消费者线程，生产者每生产一个，消费者随即消费一个，所以两个线程需要协同工作，生产者只有在消费者消费之后才会继续生产，消费者只有在生产者生产之后才会消费
+多种方法实现   Object.wait/notify
+我们可以使用 Optional 作为存放随机数的容器，通过这个共有的容器去协同两个线程的工作，一定要注意的是：Optional是不可变的，两个线程如果有同一个Optional对象的引用，那么生产者线程每次都生产一个随机数，都会指向新的Optional对象，而消费者线程拿到的还是旧的对象，这样肯定得不到我们想要的结果。 所以我们应该在Optional外面包一层类，问题就迎刃而解了！
+package com.github.hcsp.multithread; import java.util.Optional; import java.util.Random; public class ProducerConsumer1 { public static void main(String[] args) throws InterruptedException { //同一把Object锁 Object lock = new Object(); Container container = new Container(); Producer producer = new Producer(lock, container); Consumer consumer = new Consumer(lock, container); producer."/>
+
+	
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+
+    
+   
+  
+
+  <header>
+    <div class="bg-black">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l justify-between items-center center">
+    <a href="/" class="f3 fw2 hover-white no-underline white-90 dib">
+      
+        阿茂的博客
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+  </div>
+</nav>
+
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  <article class="flex-l flex-wrap justify-between mw8 center ph3">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref b helvetica tracked">
+          
+        POSTS
+      </aside>
+      
+
+
+
+
+  <div id="sharing" class="mt3">
+
+    
+    <a href="https://www.facebook.com/sharer.php?u=http://example.org/posts/%E5%A4%9A%E7%A7%8D%E6%96%B9%E6%B3%95%E5%AE%9E%E7%8E%B0%E7%94%9F%E4%BA%A7%E8%80%85%E6%B6%88%E8%B4%B9%E8%80%85%E6%A8%A1%E5%9E%8B/" class="facebook no-underline" aria-label="share on Facebook">
+      <svg height="32px"  style="enable-background:new 0 0 67 67;" version="1.1" viewBox="0 0 67 67" width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M28.765,50.32h6.744V33.998h4.499l0.596-5.624h-5.095  l0.007-2.816c0-1.466,0.14-2.253,2.244-2.253h2.812V17.68h-4.5c-5.405,0-7.307,2.729-7.307,7.317v3.377h-3.369v5.625h3.369V50.32z   M33,64C16.432,64,3,50.569,3,34S16.432,4,33,4s30,13.431,30,30S49.568,64,33,64z" style="fill-rule:evenodd;clip-rule:evenodd;"/></svg>
+
+    </a>
+
+    
+    
+    <a href="https://twitter.com/share?url=http://example.org/posts/%E5%A4%9A%E7%A7%8D%E6%96%B9%E6%B3%95%E5%AE%9E%E7%8E%B0%E7%94%9F%E4%BA%A7%E8%80%85%E6%B6%88%E8%B4%B9%E8%80%85%E6%A8%A1%E5%9E%8B/&amp;text=%e5%a4%9a%e7%a7%8d%e6%96%b9%e6%b3%95%e5%ae%9e%e7%8e%b0%e7%94%9f%e4%ba%a7%e8%80%85%e6%b6%88%e8%b4%b9%e8%80%85%e6%a8%a1%e5%9e%8b" class="twitter no-underline" aria-label="share on Twitter">
+      <svg height="32px"  style="enable-background:new 0 0 67 67;" version="1.1" viewBox="0 0 67 67" width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M37.167,22.283c-2.619,0.953-4.274,3.411-4.086,6.101  l0.063,1.038l-1.048-0.127c-3.813-0.487-7.145-2.139-9.974-4.915l-1.383-1.377l-0.356,1.017c-0.754,2.267-0.272,4.661,1.299,6.271  c0.838,0.89,0.649,1.017-0.796,0.487c-0.503-0.169-0.943-0.296-0.985-0.233c-0.146,0.149,0.356,2.076,0.754,2.839  c0.545,1.06,1.655,2.097,2.871,2.712l1.027,0.487l-1.215,0.021c-1.173,0-1.215,0.021-1.089,0.467  c0.419,1.377,2.074,2.839,3.918,3.475l1.299,0.444l-1.131,0.678c-1.676,0.976-3.646,1.526-5.616,1.568  C19.775,43.256,19,43.341,19,43.405c0,0.211,2.557,1.397,4.044,1.864c4.463,1.377,9.765,0.783,13.746-1.568  c2.829-1.673,5.657-5,6.978-8.221c0.713-1.716,1.425-4.851,1.425-6.354c0-0.975,0.063-1.102,1.236-2.267  c0.692-0.678,1.341-1.419,1.467-1.631c0.21-0.403,0.188-0.403-0.88-0.043c-1.781,0.636-2.033,0.551-1.152-0.402  c0.649-0.678,1.425-1.907,1.425-2.267c0-0.063-0.314,0.042-0.671,0.233c-0.377,0.212-1.215,0.53-1.844,0.72l-1.131,0.361l-1.027-0.7  c-0.566-0.381-1.361-0.805-1.781-0.932C39.766,21.902,38.131,21.944,37.167,22.283z M33,64C16.432,64,3,50.569,3,34S16.432,4,33,4  s30,13.431,30,30S49.568,64,33,64z" style="fill-rule:evenodd;clip-rule:evenodd;fill:;"/></svg>
+
+    </a>
+
+    
+    <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=http://example.org/posts/%E5%A4%9A%E7%A7%8D%E6%96%B9%E6%B3%95%E5%AE%9E%E7%8E%B0%E7%94%9F%E4%BA%A7%E8%80%85%E6%B6%88%E8%B4%B9%E8%80%85%E6%A8%A1%E5%9E%8B/&amp;title=%e5%a4%9a%e7%a7%8d%e6%96%b9%e6%b3%95%e5%ae%9e%e7%8e%b0%e7%94%9f%e4%ba%a7%e8%80%85%e6%b6%88%e8%b4%b9%e8%80%85%e6%a8%a1%e5%9e%8b" class="linkedin no-underline" aria-label="share on LinkedIn">
+      <svg  height="32px"  style="enable-background:new 0 0 65 65;" version="1.1" viewBox="0 0 65 65" width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <path d="M50.837,48.137V36.425c0-6.275-3.35-9.195-7.816-9.195  c-3.604,0-5.219,1.983-6.119,3.374V27.71h-6.79c0.09,1.917,0,20.427,0,20.427h6.79V36.729c0-0.609,0.044-1.219,0.224-1.655  c0.49-1.22,1.607-2.483,3.482-2.483c2.458,0,3.44,1.873,3.44,4.618v10.929H50.837z M22.959,24.922c2.367,0,3.842-1.57,3.842-3.531  c-0.044-2.003-1.475-3.528-3.797-3.528s-3.841,1.524-3.841,3.528c0,1.961,1.474,3.531,3.753,3.531H22.959z M34,64  C17.432,64,4,50.568,4,34C4,17.431,17.432,4,34,4s30,13.431,30,30C64,50.568,50.568,64,34,64z M26.354,48.137V27.71h-6.789v20.427  H26.354z" style="fill-rule:evenodd;clip-rule:evenodd;fill:;"/>
+</svg>
+
+    </a>
+  </div>
+
+
+      <h1 class="f1 athelas mt3 mb1">多种方法实现生产者消费者模型</h1>
+      
+      
+      
+      <time class="f6 mv4 dib tracked" datetime="2021-12-01T12:11:09+08:00">December 1, 2021</time>
+      
+
+      
+      
+    </header>
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l"><h1 id="记录一下多种方法实现生产者消费者模型">记录一下多种方法实现生产者消费者模型</h1>
+<h2 id="要求生产者生产10个随机的整数供消费者使用消费者依次消费这10个随机的整数">要求：生产者生产10个随机的整数供消费者使用，消费者依次消费这10个随机的整数</h2>
+<h2 id="标准输出应该得到这样的结果">标准输出应该得到这样的结果：</h2>
+<pre tabindex="0"><code>Producing 42
+Consuming 42
+Producing -1
+Consuming -1
+...
+Producing 10086
+Consuming 10086
+Producing -12345678
+Consuming -12345678
+</code></pre><h3 id="分析要求">分析要求</h3>
+<p>我们可以分别创建生产者线程和消费者线程，生产者每生产一个，消费者随即消费一个，所以两个线程需要协同工作，生产者只有在消费者消费之后才会继续生产，消费者只有在生产者生产之后才会消费</p>
+<h3 id="多种方法实现">多种方法实现</h3>
+<ul>
+<li>
+<p><code>Object.wait/notify</code></p>
+<p><img src="/static/%E5%A4%9A%E7%A7%8D%E6%96%B9%E5%BC%8F1.png" alt="Optional"></p>
+<p>我们可以使用 <code>Optional</code> 作为存放随机数的容器，通过这个共有的容器去协同两个线程的工作，一定要注意的是：<code>Optional</code>是不可变的，两个线程如果有同一个<code>Optional</code>对象的引用，那么生产者线程每次都生产一个随机数，都会指向新的<code>Optional</code>对象，而消费者线程拿到的还是旧的对象，这样肯定得不到我们想要的结果。 所以我们应该在<code>Optional</code>外面包一层类，问题就迎刃而解了！</p>
+<pre tabindex="0"><code>package com.github.hcsp.multithread;
+
+import java.util.Optional;
+import java.util.Random;
+
+public class ProducerConsumer1 {
+    public static void main(String[] args) throws InterruptedException {
+        //同一把Object锁
+        Object lock = new Object();
+
+        Container container = new Container();
+        Producer producer = new Producer(lock, container);
+        Consumer consumer = new Consumer(lock, container);
+
+        producer.start();
+        consumer.start();
+
+        producer.join();
+        producer.join();
+    }
+
+    //生产者线程
+    public static class Producer extends Thread {
+        Object lock;
+        Container container;
+
+        public Producer(Object lock, Container container) {
+            this.lock = lock;
+            this.container = container;
+        }
+
+        @Override
+        public void run() {
+            for (int i = 0; i &lt; 10; i++) {
+                synchronized (lock) {
+                    //当optional中有数据，那么生产者阻塞，等待被唤醒
+                    while (container.getOptional().isPresent()) {
+                        try {
+                            lock.wait();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    //当optional中没有数据，那么生产者生产，赋值，最后唤醒生产者
+                    int r = new Random().nextInt();
+                    container.setOptional(Optional.of(r));
+                    System.out.println(&quot;Producing &quot; + r);
+                    lock.notify();
+                }
+            }
+        }
+    }
+
+    //消费者线程
+    public static class Consumer extends Thread {
+        Object lock;
+        Container container;
+
+        public Consumer(Object lock, Container container) {
+            this.lock = lock;
+            this.container = container;
+        }
+
+        @Override
+        public void run() {
+            for (int i = 0; i &lt; 10; i++) {
+                synchronized (lock) {
+                    //当optional中没有数据，那么消费者阻塞，等待被唤醒
+                    while (!container.getOptional().isPresent()) {
+                        try {
+                            lock.wait();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    //当optional中有数据，那么消费者消费，然后清空optional，最后唤醒生产者
+                    Integer a = container.optional.get();
+                    System.out.println(&quot;Consuming &quot; + a);
+                    container.optional = Optional.empty();
+                    lock.notify();
+                }
+            }
+        }
+    }
+    //外包一层Container
+    public static class Container {
+        //装数据的容器optional
+        private Optional&lt;Integer&gt; optional = Optional.empty();
+
+        public Optional&lt;Integer&gt; getOptional() {
+            return optional;
+        }
+
+        public void setOptional(Optional&lt;Integer&gt; optional) {
+            this.optional = optional;
+        }
+    }
+}
+
+</code></pre></li>
+<li>
+<p><code>Lock/Condition</code></p>
+<p><img src="/static/%E5%A4%9A%E7%A7%8D%E6%96%B9%E6%B3%952.png" alt="Condition"></p>
+<p>通过同一把ReentrantLock锁去创建两个条件 <code>Condition notFull</code>和<code>Condition notEmpty</code>，通过这两个条件去协同两个线程的运行，值得注意的是：<code>notFull.await</code>,<code>notEmpty.await</code>不要粗心写成<code>.wait</code></p>
+<pre tabindex="0"><code>package com.github.hcsp.multithread;
+
+import java.util.Optional;
+import java.util.Random;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.ReentrantLock;
+
+public class ProducerConsumer2 {
+    public static void main(String[] args) throws InterruptedException {
+        //创建一把ReentrantLock
+        ReentrantLock Lock = new ReentrantLock();
+        //外包容器中要用lock.newCondition() 创建两个条件
+        Container container = new Container(Lock);
+        Producer producer = new Producer(Lock, container);
+        Consumer consumer = new Consumer(Lock, container);
+
+        producer.start();
+        consumer.start();
+
+        producer.join();
+        producer.join();
+    }
+
+    public static class Producer extends Thread {
+        ReentrantLock lock;
+        Container container;
+
+        public Producer(ReentrantLock lock, Container container) {
+            this.lock = lock;
+            this.container = container;
+        }
+
+        @Override
+        public void run() {
+            for (int i = 0; i &lt; 10; i++) {
+                try {
+                    //上锁
+                    lock.lock();
+                    //当optional中有数据，条件一等待，生产者阻塞，等待被唤醒
+                    while (container.getOptional().isPresent()) {
+                        container.notEmpty.await();
+                    }
+                    //当optional中没有数据，那么生产者生产，赋值，最后唤醒等待的条件二
+                    int r = new Random().nextInt();
+                    container.setOptional(Optional.of(r));
+                    System.out.println(&quot;Producing &quot; + r);
+                    container.notFull.signal();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                    //记得解锁
+                } finally {
+                    lock.unlock();
+                }
+            }
+        }
+    }
+
+    public static class Consumer extends Thread {
+        ReentrantLock lock;
+        Container container;
+
+        public Consumer(ReentrantLock lock, Container container) {
+            this.lock = lock;
+            this.container = container;
+        }
+
+        @Override
+        public void run() {
+            for (int i = 0; i &lt; 10; i++) {
+                try {
+                    //上锁
+                    lock.lock();
+                    //当optional中没有数据，条件二等待，消费者阻塞，等待被唤醒
+                    while (!container.getOptional().isPresent()) {
+                        container.notFull.await();
+                    }
+                    //当optional中有数据，那么消费者消费，然后清空optional，最后唤醒等待的条件一
+                    Integer a = container.optional.get();
+                    System.out.println(&quot;Consuming &quot; + a);
+                    container.optional = Optional.empty();
+                    container.notEmpty.signal();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                    //记得解锁
+                } finally {
+                    lock.unlock();
+                }
+            }
+        }
+    }
+
+    public static class Container {
+        private Optional&lt;Integer&gt; optional = Optional.empty();
+        ReentrantLock lock;
+        Condition notFull;
+        Condition notEmpty;
+
+        //通过构造器传入lock 并创造两个条件对象
+        public Container(ReentrantLock lock) {
+            this.notEmpty = lock.newCondition();
+            this.notFull = lock.newCondition();
+        }
+
+        public Optional&lt;Integer&gt; getOptional() {
+            return optional;
+        }
+
+        public void setOptional(Optional&lt;Integer&gt; optional) {
+            this.optional = optional;
+        }
+    }
+}
+
+</code></pre></li>
+<li>
+<p><code>BlockingQueue</code></p>
+<p><img src="/static/%E5%A4%9A%E7%A7%8D%E6%96%B9%E6%B3%953-1.png" alt="BlockingQueue">
+<img src="/static/%E5%A4%9A%E7%A7%8D%E6%96%B9%E6%B3%953-2.png" alt="BlockingQueue"></p>
+<p><code>BlockingQueue</code>阻塞队列中<code>put</code>方法意思是队列中有位置的话就插入一个元素，没有位置的话就等待直到有可用的位置出现，<code>take</code>意思是从队列的头部拿走一个元素，即空出一个位置，没有元素的话就等待直到有元素进入队列。
+那我们应该创建两个容量为1的队列，最多只允许插入一个元素。 生产者线程中队列一先插入一个元素，队列二拿走一个元素（队列二如果是空的，所以在这里等待&hellip;）；然后消费者者线程中队列一先拿走一个元素，队列二生产一个元素。</p>
+<pre tabindex="0"><code>package com.github.hcsp.multithread;
+
+import java.util.Random;
+import java.util.concurrent.BlockingDeque;
+import java.util.concurrent.LinkedBlockingDeque;
+
+public class ProducerConsumer3 {
+    public static void main(String[] args) throws InterruptedException {
+        //blockingDeque 队列put and take生产消费需要的数据
+        BlockingDeque blockingDeque = new LinkedBlockingDeque(1);
+        //blockingDeque0 队列控制两个线程的等待和运行
+        BlockingDeque blockingDeque0 = new LinkedBlockingDeque(1);
+
+        Producer producer = new Producer(blockingDeque, blockingDeque0);
+        Consumer consumer = new Consumer(blockingDeque, blockingDeque0);
+
+        producer.start();
+        consumer.start();
+
+        producer.join();
+        producer.join();
+    }
+
+    public static class Producer extends Thread {
+        BlockingDeque&lt;Integer&gt; blockingDeque;
+        BlockingDeque&lt;Integer&gt; blockingDeque0;
+
+        public Producer(BlockingDeque&lt;Integer&gt; blockingDeque, BlockingDeque&lt;Integer&gt; blockingDeque0) {
+            this.blockingDeque = blockingDeque;
+            this.blockingDeque0 = blockingDeque0;
+        }
+
+        @Override
+        public void run() {
+            for (int i = 0; i &lt; 10; i++) {
+                int r = new Random().nextInt();
+                System.out.println(&quot;Producing &quot; + r);
+                try {
+                    //将随机数加入blockingDeque队列，此时已经满了！
+                    blockingDeque.put(r);
+                    //从blockingDeque0队列中拿数据 (如果blockingDeque0队列中没有数据，就会停在这里)
+                    blockingDeque0.take();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    public static class Consumer extends Thread {
+
+        BlockingDeque&lt;Integer&gt; blockingDeque;
+        BlockingDeque&lt;Integer&gt; blockingDeque0;
+
+        public Consumer(BlockingDeque&lt;Integer&gt; blockingDeque, BlockingDeque&lt;Integer&gt; blockingDeque0) {
+            this.blockingDeque = blockingDeque;
+            this.blockingDeque0 = blockingDeque0;
+        }
+
+        @Override
+        public void run() {
+            for (int i = 0; i &lt; 10; i++) {
+                try {
+                    //从blockingDeque队列中拿数据 (如果blockingDeque队列中没有数据，就会停在这里)
+                    Integer a = blockingDeque.take();
+                    System.out.println(&quot;Consuming &quot; + a);
+                    //将数据加入blockingDeque0队列，此数据没有实际意义！
+                    blockingDeque0.put(0);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+}
+
+</code></pre></li>
+<li>
+<p><code>Exchanger</code></p>
+<p><img src="/static/%E5%A4%9A%E7%A7%8D%E6%96%B9%E6%B3%954.jpg" alt="Exchanger">
+生产者和消费者线程各自有一个作为交换的容器对象，且共有两个交换器对象，一个交换器作为交换我们需要的数据，另一交换器协同两个线程工作。</p>
+<pre tabindex="0"><code>package com.github.hcsp.multithread;
+
+import java.util.Optional;
+import java.util.Random;
+import java.util.concurrent.Exchanger;
+
+public class ProducerConsumer4 {
+    public static void main(String[] args) throws InterruptedException {
+
+        //exchanger交换器用来交换我们需要的随机数
+        Exchanger&lt;Optional&gt; exchanger = new Exchanger&lt;Optional&gt;();
+        //exchangerControler交换器用来协同两个线程的工作
+        Exchanger&lt;Integer&gt; exchangerControler = new Exchanger&lt;Integer&gt;();
+
+        Producer producer = new Producer(exchanger, exchangerControler);
+        Consumer consumer = new Consumer(exchanger, exchangerControler);
+
+        producer.start();
+        consumer.start();
+
+
+        producer.join();
+        producer.join();
+    }
+
+    public static class Producer extends Thread {
+        Optional&lt;Integer&gt; producerOptional = Optional.empty();
+        Exchanger&lt;Optional&gt; exchanger;
+        Exchanger&lt;Integer&gt; exchangerControler;
+
+        public Producer(Exchanger exchanger, Exchanger&lt;Integer&gt; exchangerControler) {
+            this.exchanger = exchanger;
+            this.exchangerControler = exchangerControler;
+        }
+
+        @Override
+        public void run() {
+            for (int i = 0; i &lt; 10; i++) {
+                //生产者生产随机数
+                int r = new Random().nextInt();
+                System.out.println(&quot;Producing &quot; + r);
+                producerOptional = Optional.of(r);
+                //交换Optional，如果消费者线程没到达，则停在这里等待
+                try {
+                    producerOptional = exchanger.exchange(producerOptional);
+                    //交换整形数据，为了让生产者线程停在这里等待消费者完成消费
+                    Integer a = 0;
+                    a = exchangerControler.exchange(a);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    public static class Consumer extends Thread {
+        Exchanger&lt;Optional&gt; exchanger;
+        Optional&lt;Integer&gt; consumerOptional = Optional.empty();
+        Exchanger&lt;Integer&gt; exchangerControler;
+
+        public Consumer(Exchanger exchanger, Exchanger&lt;Integer&gt; exchangerControler) {
+            this.exchanger = exchanger;
+            this.exchangerControler = exchangerControler;
+        }
+
+        @Override
+        public void run() {
+            for (int j = 0; j &lt; 10; j++) {
+                try {
+                    //交换Optional，如果生产者线程没到达，则停在这里等待
+                    consumerOptional = exchanger.exchange(consumerOptional);
+                    Integer a = consumerOptional.get();
+                    System.out.println(&quot;Consuming &quot; + a);
+                    consumerOptional = Optional.empty();
+                    //交换整形数据，使得生产者和消费者在此继续新的循环
+                    Integer i = 0;
+                    i = exchangerControler.exchange(i);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+}
+
+</code></pre></li>
+<li>
+<p><code>Semaphore</code></p>
+<p><img src="/static/%E5%A4%9A%E7%A7%8D%E6%96%B9%E6%B3%955-1.png" alt="Semaphore">
+<img src="/static/%E5%A4%9A%E7%A7%8D%E6%96%B9%E6%B3%955-2.png" alt="Semaphore">
+<code>acquire</code>方法是从此信号量中获取给定数量的许可，减少给定数量的可用许可证数，如果没有可获取的信号灯，那么线程休眠，等待有可用的许可证数。<code>release</code>方法将会给定数量的许可。
+生产者消费者线程共有两个信号量对象来协同线程的工作，具体实现参考代码注释</p>
+<pre tabindex="0"><code>package com.github.hcsp.multithread;
+
+import java.util.Optional;
+import java.util.Random;
+import java.util.concurrent.Semaphore;
+
+public class ProducerConsumer5 {
+    public static void main(String[] args) throws InterruptedException {
+        //共用同一个container
+        Container container = new Container();
+
+        Producer producer = new Producer(container);
+        Consumer consumer = new Consumer(container);
+
+        producer.start();
+        consumer.start();
+
+        producer.join();
+        producer.join();
+    }
+
+    public static class Producer extends Thread {
+        Container container;
+
+        public Producer(Container container) {
+            this.container = container;
+        }
+
+        @Override
+        public void run() {
+            for (int j = 0; j &lt; 10; j++) {
+                try {
+                    //信号量为1，生产者acquir方法可以直接获得1个许可继续进行
+                    container.semaphore.acquire();
+                    while (!container.getOptional().isPresent()) {
+                        int r = new Random().nextInt();
+                        System.out.println(&quot;Producing &quot; + r);
+                        container.setOptional(Optional.of(r));
+                    }
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } finally {
+                    //释放一个semaphore0的许可证，使得消费者线程semaphore0.acquir可以继续进行
+                    container.semaphore0.release();
+                }
+            }
+        }
+    }
+
+    public static class Consumer extends Thread {
+        Container container;
+
+        public Consumer(Container container) {
+            this.container = container;
+        }
+
+        @Override
+        public void run() {
+            for (int j = 0; j &lt; 10; j++) {
+                try {
+                    //容器没有数据时，
+                    while (!container.getOptional().isPresent()) {
+                        //信号量为0，消费者semaphore0.acquir方法，发现没有可用的许可证，便会在此等待
+                        container.semaphore0.acquire();
+                    }
+                    Integer a = container.getOptional().get();
+                    System.out.println(&quot;Consuming &quot; + a);
+                    container.setOptional(Optional.empty());
+
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } finally {
+                    //释放一个semaphore的许可证，使得生产者线程循环第二轮semaphore.acquir可以继续进行
+                    container.semaphore.release();
+                }
+            }
+        }
+    }
+
+    static class Container {
+        private Optional&lt;Integer&gt; optional = Optional.empty();
+        //信号量为1，生产者semaphore.acquir方法可以直接获得1个许可继续进行
+        Semaphore semaphore = new Semaphore(1);
+        //信号量为0，消费者semaphore0.acquir方法，发现没有可用的许可证，便会等待
+        Semaphore semaphore0 = new Semaphore(0);
+
+        public Optional&lt;Integer&gt; getOptional() {
+            return optional;
+        }
+
+        public void setOptional(Optional&lt;Integer&gt; optional) {
+            this.optional = optional;
+        }
+    }
+}
+
+</code></pre></li>
+</ul>
+<ul class="pa0">
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+</aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="http://example.org/" >
+    &copy;  阿茂的博客 2021 
+  </a>
+    <div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+  </div>
+</footer>
+
+  </body>
+</html>
