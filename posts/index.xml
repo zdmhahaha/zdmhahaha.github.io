@@ -6,11 +6,11 @@
     <description>Recent content in Posts on 阿茂的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-Hans</language>
-    <lastBuildDate>Wed, 01 Dec 2021 12:11:09 +0800</lastBuildDate><atom:link href="http://example.org/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 02 Dec 2021 14:14:34 +0800</lastBuildDate><atom:link href="http://example.org/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>多种方法实现生产者消费者模型</title>
       <link>http://example.org/posts/%E5%A4%9A%E7%A7%8D%E6%96%B9%E6%B3%95%E5%AE%9E%E7%8E%B0%E7%94%9F%E4%BA%A7%E8%80%85%E6%B6%88%E8%B4%B9%E8%80%85%E6%A8%A1%E5%9E%8B/</link>
-      <pubDate>Wed, 01 Dec 2021 12:11:09 +0800</pubDate>
+      <pubDate>Thu, 02 Dec 2021 14:14:34 +0800</pubDate>
       
       <guid>http://example.org/posts/%E5%A4%9A%E7%A7%8D%E6%96%B9%E6%B3%95%E5%AE%9E%E7%8E%B0%E7%94%9F%E4%BA%A7%E8%80%85%E6%B6%88%E8%B4%B9%E8%80%85%E6%A8%A1%E5%9E%8B/</guid>
       <description>记录一下多种方法实现生产者消费者模型 要求：生产者生产10个随机的整数供消费者使用，消费者依次消费这10个随机的整数 标准输出应该得到这样的结果： Producing 42 Consuming 42 Producing -1 Consuming -1 ... Producing 10086 Consuming 10086 Producing -12345678 Consuming -12345678 分析要求 我们可以分别创建生产者线程和消费者线程，生产者每生产一个，消费者随即消费一个，所以两个线程需要协同工作，生产者只有在消费者消费之后才会继续生产，消费者只有在生产者生产之后才会消费
