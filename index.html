@@ -128,6 +128,35 @@
       
       <div class="blah w-100">
         <h1 class="f3 fw1 athelas mt0 lh-title">
+          <a href="/posts/html%E6%A0%87%E7%AD%BE%E5%B0%8F%E8%AE%B0/" class="color-inherit dim link">
+            HTML标签小记
+            </a>
+        </h1>
+        <div class="f6 f5-l lh-copy nested-copy-line-height nested-links">
+          记录一下HTML常用的标签 a 标签的用法 属性   href
+规定链接的目标 URL
+ 可以是网址， 文件路径， 以及伪协议（Javascript:代码） id href=#XXX  特别注意：
+ 如果href的value为&quot;&quot;，那么每次跳转都会刷新页面 如果href的value为&quot;#&quot;，那么每次跳转都会自动拉回到顶部 如果href的value为&quot;javascript:;&quot;，即不刷新也不跳转到顶部，啥也不干    target
+规定在何处打开目标 URL。仅在 href 属性存在时使用。
+ _blank ：新窗口打开 _parent ：在父窗口中打开链接 _self : 默认，当前页面跳转。 _top : 在当前窗体打开链接，并替换当前的整个窗体 XXX ：新窗口打开, 且每次新打开的窗口更新为XXX    table 标签的用法 属性  thead tbody tfoot tr td th  &lt;table&gt; &lt;thead&gt; &lt;tr&gt; &lt;th&gt;&lt;/th&gt; &lt;th&gt;数学&lt;/th&gt; &lt;th&gt;语文&lt;/th&gt; &lt;/tr&gt; &lt;/thead&gt; &lt;tbody&gt; &lt;tr&gt; &lt;th&gt;小明&lt;/th&gt; &lt;td&gt;90&lt;/td&gt; &lt;td&gt;80&lt;/td&gt; &lt;/tr&gt; &lt;tr&gt; &lt;th&gt;小王&lt;/th&gt; &lt;td&gt;80&lt;/td&gt; &lt;td&gt;90&lt;/td&gt; &lt;/tr&gt; &lt;/tbody&gt; &lt;tfoot&gt; &lt;tr&gt; &lt;th&gt;总分&lt;/th&gt; &lt;td&gt;170&lt;/td&gt; &lt;td&gt;170&lt;/td&gt; &lt;/tr&gt; &lt;/tfoot&gt; &lt;/table&gt; 数学 语文 小明 90 80 小王 80 90 总分 170 170 img 标签的用法 作用 发出一张get请求，展示一张图片
+        </div>
+          <a href="/posts/html%E6%A0%87%E7%AD%BE%E5%B0%8F%E8%AE%B0/" class="ba b--moon-gray bg-light-gray br2 color-inherit dib f7 hover-bg-moon-gray link mt2 ph2 pv1">read more</a>
+        
+      </div>
+    </div>
+  </div>
+</article>
+
+          </div>
+        
+          <div class="relative w-100 mb4">
+            
+<article class="bb b--black-10">
+  <div class="db pv4 ph3 ph0-l no-underline dark-gray">
+    <div class="flex flex-column flex-row-ns">
+      
+      <div class="blah w-100">
+        <h1 class="f3 fw1 athelas mt0 lh-title">
           <a href="/posts/%E5%A4%9A%E7%A7%8D%E6%96%B9%E6%B3%95%E5%AE%9E%E7%8E%B0%E7%94%9F%E4%BA%A7%E8%80%85%E6%B6%88%E8%B4%B9%E8%80%85%E6%A8%A1%E5%9E%8B/" class="color-inherit dim link">
             多种方法实现生产者消费者模型
             </a>
@@ -172,39 +201,18 @@ Collection集合的通用方法  boolean add(E e)：把给定的对象添加到�
 
           </div>
         
-          <div class="relative w-100 mb4">
-            
-<article class="bb b--black-10">
-  <div class="db pv4 ph3 ph0-l no-underline dark-gray">
-    <div class="flex flex-column flex-row-ns">
-      
-      <div class="blah w-100">
-        <h1 class="f3 fw1 athelas mt0 lh-title">
-          <a href="/posts/%E8%A7%A3%E5%86%B3%E5%8C%85%E5%86%B2%E7%AA%81/" class="color-inherit dim link">
-            解决包冲突
-            </a>
-        </h1>
-        <div class="f6 f5-l lh-copy nested-copy-line-height nested-links">
-          记录一下如何解决包冲突（小白视角大白话） 类路径（Claspath）  类的全限定类名（目录层级） 唯一确定了一个类 包就是把许多类放在⼀起的压缩包 在哪⾥可以找到类？-classpath/-cp 后面的包中！  我们在使用第三方类时，可能所使用的第三方类依赖了其他类，全限定类名是类的唯⼀标识！没有其他标识了！当多个同名类同时出现在Classpath中，麻烦就来了！
-Maven——划时代的包管理  Maven的中央仓库，按照⼀定的约定存储包，按照约定为所有的包编号，⽅便检索（groupId/artifactId/version） Maven的本地仓库，默认位于~/.m2（下载的第三⽅包放在这⾥进⾏缓存） 传递性依赖的⾃动管理，即绝对不允许最终的classpath出现同名不同版本的jar包 依赖冲突的解决：原则：最近的胜出  解决包冲突 当你看到如下的异常的时候，说明包冲突了！
- AbstractMethodError NoClassDefFoundError ClassNotFoundException LinkageError  不要着急  看下后面异常的包名，idea右上角的Maven dependencies可以查看具体的依赖关系，也可以在终端中执行 mvn dependency:tree 查看Maven帮你解决冲突后的依赖关系（它把冲突解决后的那个依赖给咱们去掉了） 在mvn中央仓库中，通过包的编号（groupId/artifactId/version）通过源码查看不同版本的信息，选择需要的版本  方法一 既然谁离得近谁赢，那我们可以强行在 pom.xml 中直接引用正确的版本，如果 dependencies 中已经存在依赖的版本，将其删除或者改正为正确的版本
-方法二 将依赖错误版本的包排除，即在依赖 错误版本的包 的依赖中插入代码,如图 方法三 Maven helper 插件 
-        </div>
-          <a href="/posts/%E8%A7%A3%E5%86%B3%E5%8C%85%E5%86%B2%E7%AA%81/" class="ba b--moon-gray bg-light-gray br2 color-inherit dib f7 hover-bg-moon-gray link mt2 ph2 pv1">read more</a>
-        
-      </div>
-    </div>
-  </div>
-</article>
-
-          </div>
-        
       </section>
 
       
       <section class="w-100">
         <h1 class="f3">More</h1>
         
+        
+          <h2 class="f5 fw4 mb4 dib mr3">
+            <a href="/posts/%E8%A7%A3%E5%86%B3%E5%8C%85%E5%86%B2%E7%AA%81/" class="link black dim">
+              解决包冲突
+            </a>
+          </h2>
         
           <h2 class="f5 fw4 mb4 dib mr3">
             <a href="/posts/%E4%BD%BF%E7%94%A8hugo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/" class="link black dim">
@@ -233,7 +241,7 @@ Maven——划时代的包管理  Maven的中央仓库，按照⼀定的约定�
     <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
   <div class="flex justify-between">
   <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="http://example.org/" >
-    &copy;  阿茂的博客 2021 
+    &copy;  阿茂的博客 2022 
   </a>
     <div>
 

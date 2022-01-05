@@ -6,7 +6,21 @@
     <description>Recent content in Posts on 阿茂的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-Hans</language>
-    <lastBuildDate>Thu, 02 Dec 2021 14:14:34 +0800</lastBuildDate><atom:link href="http://example.org/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 04 Jan 2022 23:12:51 +0800</lastBuildDate><atom:link href="http://example.org/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>HTML标签小记</title>
+      <link>http://example.org/posts/html%E6%A0%87%E7%AD%BE%E5%B0%8F%E8%AE%B0/</link>
+      <pubDate>Tue, 04 Jan 2022 23:12:51 +0800</pubDate>
+      
+      <guid>http://example.org/posts/html%E6%A0%87%E7%AD%BE%E5%B0%8F%E8%AE%B0/</guid>
+      <description>记录一下HTML常用的标签 a 标签的用法 属性   href
+规定链接的目标 URL
+ 可以是网址， 文件路径， 以及伪协议（Javascript:代码） id href=#XXX  特别注意：
+ 如果href的value为&amp;quot;&amp;quot;，那么每次跳转都会刷新页面 如果href的value为&amp;quot;#&amp;quot;，那么每次跳转都会自动拉回到顶部 如果href的value为&amp;quot;javascript:;&amp;quot;，即不刷新也不跳转到顶部，啥也不干    target
+规定在何处打开目标 URL。仅在 href 属性存在时使用。
+ _blank ：新窗口打开 _parent ：在父窗口中打开链接 _self : 默认，当前页面跳转。 _top : 在当前窗体打开链接，并替换当前的整个窗体 XXX ：新窗口打开, 且每次新打开的窗口更新为XXX    table 标签的用法 属性  thead tbody tfoot tr td th  &amp;lt;table&amp;gt; &amp;lt;thead&amp;gt; &amp;lt;tr&amp;gt; &amp;lt;th&amp;gt;&amp;lt;/th&amp;gt; &amp;lt;th&amp;gt;数学&amp;lt;/th&amp;gt; &amp;lt;th&amp;gt;语文&amp;lt;/th&amp;gt; &amp;lt;/tr&amp;gt; &amp;lt;/thead&amp;gt; &amp;lt;tbody&amp;gt; &amp;lt;tr&amp;gt; &amp;lt;th&amp;gt;小明&amp;lt;/th&amp;gt; &amp;lt;td&amp;gt;90&amp;lt;/td&amp;gt; &amp;lt;td&amp;gt;80&amp;lt;/td&amp;gt; &amp;lt;/tr&amp;gt; &amp;lt;tr&amp;gt; &amp;lt;th&amp;gt;小王&amp;lt;/th&amp;gt; &amp;lt;td&amp;gt;80&amp;lt;/td&amp;gt; &amp;lt;td&amp;gt;90&amp;lt;/td&amp;gt; &amp;lt;/tr&amp;gt; &amp;lt;/tbody&amp;gt; &amp;lt;tfoot&amp;gt; &amp;lt;tr&amp;gt; &amp;lt;th&amp;gt;总分&amp;lt;/th&amp;gt; &amp;lt;td&amp;gt;170&amp;lt;/td&amp;gt; &amp;lt;td&amp;gt;170&amp;lt;/td&amp;gt; &amp;lt;/tr&amp;gt; &amp;lt;/tfoot&amp;gt; &amp;lt;/table&amp;gt; 数学 语文 小明 90 80 小王 80 90 总分 170 170 img 标签的用法 作用 发出一张get请求，展示一张图片</description>
+    </item>
+    
     <item>
       <title>多种方法实现生产者消费者模型</title>
       <link>http://example.org/posts/%E5%A4%9A%E7%A7%8D%E6%96%B9%E6%B3%95%E5%AE%9E%E7%8E%B0%E7%94%9F%E4%BA%A7%E8%80%85%E6%B6%88%E8%B4%B9%E8%80%85%E6%A8%A1%E5%9E%8B/</link>
